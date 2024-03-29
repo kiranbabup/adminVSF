@@ -1,6 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import { useNavigate } from "react-router-dom";
 
 const mainBox ={
   display: 'flex',
@@ -36,10 +37,11 @@ const iconStyle = {
 const LoginScreen = () => {
     const [email,setEmail]= useState("");
     const [password, setPassword] = useState("");
-    
+    const navigate = useNavigate();
     const handleLogin =()=>{
         if(email === 'admin@gmail.com' && password === '123@Apple'){
-            window.location.href='/home';
+            navigate("/home")
+            // window.location.href='/home';
         }else{
             alert('Invalid Credentials');
         }
