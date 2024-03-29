@@ -384,8 +384,8 @@ const handleBlogUpload = async(event)=>{
   }
 
 
-  function logout(){
-    navigate("/")
+  const logout=()=>{
+    navigate("/login");
     // window.location.href='/'
   }
 
@@ -404,7 +404,7 @@ const handleBlogUpload = async(event)=>{
           <Typography variant="h6" noWrap component="div">
           {selectedItem !== null ? ['BROAD', 'STRATEGY', 'THEMATIC', 'SECTOR','STOCK & HEAT','MONTH & WEEK','ALL USERS','SUBSCRIBERS','UPLOADED FILES','BLOG','COUPON CODE'][selectedItem] : 'ADMIN'}
           </Typography>
-          <Button variant="h6" sx={{color:'white',fontSize:18}} onClick={logout}>Logout</Button>
+          <Button variant="h6" sx={{color:'white',fontSize:18}} onClick={()=>logout()}>Logout</Button>
         </Toolbar>
       </AppBar>
       <Drawer
