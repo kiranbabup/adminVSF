@@ -20,6 +20,7 @@ import UploadedFilesTable from "./uploadedFilesTable";
 import SubScribersTable from "./subscribersTable"
 import AllUsers from "./allUsersTable";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -53,7 +54,7 @@ const PermanentDrawerLeft=()=> {
     const [status, setStatus] = useState('');
     const [activationStatus, setActivationStatus] = React.useState('');
     const [open, setOpen] = React.useState(false);
-  
+    const navigate = useNavigate();
     const handleChange = (event) => {
       const newStatus = event.target.value;
       setActivationStatus(newStatus);
@@ -384,7 +385,8 @@ const handleBlogUpload = async(event)=>{
 
 
   function logout(){
-    window.location.href='/'
+    navigate("/")
+    // window.location.href='/'
   }
 
 
