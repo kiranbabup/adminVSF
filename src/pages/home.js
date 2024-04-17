@@ -113,7 +113,7 @@ const PermanentDrawerLeft=()=> {
 
 // coupon code api handling
 const toggleCouponActivation = (status) => {
-  const url = 'http://localhost:4000/handle-couponcode';
+  const url = 'https://vsfintech-adminpanel-node.onrender.com/handle-couponcode';
   const data = { status: status };
 
   fetch(url, {
@@ -134,7 +134,7 @@ const toggleCouponActivation = (status) => {
 
 // get coupon code status
 const fetchCouponCodeStatus = () => {
-  fetch('http://localhost:4000/couponCode-status')
+  fetch('https://vsfintech-adminpanel-node.onrender.com/couponCode-status')
     .then(response => {
       if (!response.ok) {
         throw new Error('Failed to fetch status data');
@@ -175,7 +175,7 @@ const handleBlogUpload = async(event)=>{
   }
 
   try{
-    const response = await fetch('http://localhost:4000/upload-blog',{
+    const response = await fetch('https://vsfintech-adminpanel-node.onrender.com/upload-blog',{
       method:'POST',
       body:formData,
     });
@@ -208,7 +208,7 @@ const handleBlogUpload = async(event)=>{
     formData.append('file', file);
 
     try{
-      const response = await fetch('http://localhost:4000/upload-broad',{
+      const response = await fetch('https://vsfintech-adminpanel-node.onrender.com/upload-broad',{
         method:'POST',
         body:formData,
       });
@@ -240,7 +240,7 @@ const handleBlogUpload = async(event)=>{
     formData.append('file', file);
 
     try{
-      const response = await fetch('/upload-strategy',{
+      const response = await fetch('https://vsfintech-adminpanel-node.onrender.com/upload-strategy',{
         method:'POST',
         body:formData,
       });
@@ -271,7 +271,7 @@ const handleBlogUpload = async(event)=>{
     formData.append('file', file);
 
     try{
-      const response = await fetch('/upload-thematic',{
+      const response = await fetch('https://vsfintech-adminpanel-node.onrender.com/upload-thematic',{
         method:'POST',
         body:formData,
       });
@@ -302,7 +302,7 @@ const handleBlogUpload = async(event)=>{
     formData.append('file', file);
 
     try{
-      const response = await fetch('/upload-sector',{
+      const response = await fetch('https://vsfintech-adminpanel-node.onrender.com/upload-sector',{
         method:'POST',
         body:formData,
       });
@@ -334,7 +334,7 @@ const handleBlogUpload = async(event)=>{
   formData.append('file', file);
 
   try {
-    const response = await fetch('/upload-stock&heat-data', {
+    const response = await fetch('https://vsfintech-adminpanel-node.onrender.com/upload-stock&heat-data', {
       method: 'POST',
       body: formData,
     });
@@ -366,7 +366,7 @@ const handleBlogUpload = async(event)=>{
     formData.append('file', file);
   
     try {
-      const response = await fetch('http://localhost:4000/upload-month-week', {
+      const response = await fetch('https://vsfintech-adminpanel-node.onrender.com/upload-month-week', {
         method: 'POST',
         body: formData,
       });

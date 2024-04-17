@@ -24,7 +24,7 @@ export default function StickyHeadTable() {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/users-data')
+    fetch('https://vsfintech-adminpanel-node.onrender.com/users-data')
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
