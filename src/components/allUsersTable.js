@@ -1,42 +1,45 @@
 import React, { useEffect, useState } from 'react';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow} from '@mui/material';
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
+import { loadingSpace } from '../assets/styles';
 
 const columns = [
-  { id: 'first_name', label: 'First Name'},
-  { id: 'last_name', label: 'Last Name'},
+  { id: 'first_name', label: 'First Name' },
+  { id: 'last_name', label: 'Last Name' },
   { id: 'email', label: 'Email', minWidth: 100 },
   { id: 'signup_on', label: 'Signup On', minWidth: 100 },
   { id: 'is_subscribed', label: 'Is Subscribed?', minWidth: 100 },
 ];
 
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toISOString().split('T')[0];
+};
+
 export default function StickyHeadTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [rows, setRows] = useState([]);
+  const [isAllLoading, setIsAllLoading] = useState(false);
 
   useEffect(() => {
-    fetch('https://heatmapapi.onrender.com/alluserdata')
-      .then(response => {
+    const fetchData = async () => {
+      setIsAllLoading(true);
+      try {
+        const response = await fetch(`https://heatmapapi.onrender.com/alluserdata`);
         if (!response.ok) {
-          throw new Error('Failed to fetch data');
+          throw new Error(`http error status:${response.status}`);
         }
-        return response.json();
-      })
-      .then(data => {
-        if (Array.isArray(data.data)) {
-          setRows(data.data);
-          // console.log(data.data);
-        } else {
-          throw new Error('Invalid data format');
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
+        const result = await response.json();
+        setRows(result.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsAllLoading(false);
+      }
+    };
+    fetchData();
   }, []);
-  
-// console.log(rows);
-
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -50,14 +53,16 @@ export default function StickyHeadTable() {
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
+        {
+          isAllLoading ? <Box style={loadingSpace}><CircularProgress /> </Box> :
         <Table stickyHeader aria-label="sticky table">
-          <TableHead>
+            <TableHead>
             <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth,fontWeight:'bold'}}
+                  style={{ minWidth: column.minWidth, fontWeight: 'bold' }}
                 >
                   {column.label}
                 </TableCell>
@@ -67,13 +72,15 @@ export default function StickyHeadTable() {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => {
+              .reverse().map((row, index) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     {columns.map((column) => {
                       let value = row[column.id];
                       if (column.id === 'is_subscribed') {
                         value = value === 1 ? 'Yes' : 'No';
+                      } else if (column.id === 'signup_on') {
+                        value = formatDate(value);
                       }
                       return (
                         <TableCell key={column.id} align={column.align}>
@@ -88,6 +95,7 @@ export default function StickyHeadTable() {
               })}
           </TableBody>
         </Table>
+        }
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}

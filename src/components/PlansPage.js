@@ -4,13 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveAsIcon from '@mui/icons-material/SaveAs';
-
-const loadingSpace = {
-    height: "17rem",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-}
+import { loadingSpace } from "../assets/styles";
 
 const columns = [
     { id: 'sl_no', label: 'Sl. No' },

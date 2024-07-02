@@ -1,14 +1,8 @@
-import { Box, Typography, IconButton, Button, TablePagination } from "@mui/material";
+import { Box, Typography, Button, TablePagination } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-
-const loadingSpace = {
-    height: "17rem",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-};
+import { loadingSpace } from "../../assets/styles";
 
 const columns = [
     { id: 'coupon_code', label: 'Coupon Code' },

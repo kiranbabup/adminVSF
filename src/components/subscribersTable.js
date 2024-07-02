@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
+import { loadingSpace } from '../assets/styles';
 
 const columns = [
   { id: 'first_name', label: 'First Name' },
@@ -20,26 +15,25 @@ export default function StickyHeadTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [rows, setRows] = useState([]);
+  const [isSTLoading, setIsSTLoading] = useState(false);
 
   useEffect(() => {
-    fetch('https://heatmapapi.onrender.com/subscribersdata')
-      .then(response => {
+    const fetchData = async () => {
+      setIsSTLoading(true);
+      try {
+        const response = await fetch(`https://heatmapapi.onrender.com/subscribersdata`);
         if (!response.ok) {
-          throw new Error('Failed to fetch data');
+          throw new Error(`http error status:${response.status}`);
         }
-        return response.json();
-      })
-      .then(data => {
-        if (Array.isArray(data.data)) {
-          setRows(data.data);
-          console.log(data.data);
-        } else {
-          throw new Error('Invalid data format');
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
+        const result = await response.json();
+        setRows(result.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsSTLoading(false);
+      }
+    };
+    fetchData();
   }, []);
 
   const handleChangePage = (event, newPage) => {
@@ -54,42 +48,45 @@ export default function StickyHeadTable() {
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth, fontWeight: 'bold' }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
+        {
+          isSTLoading ? <Box style={loadingSpace}><CircularProgress /> </Box> :
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth, fontWeight: 'bold' }}
+                    >
+                      {column.label}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {rows
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .reverse().map((row, index) => {
+                    return (
+                      <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                        {columns.map((column) => {
+                          const value = row[column.id];
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              {column.format && typeof value === 'number'
+                                ? column.format(value)
+                                : value}
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+        }
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}

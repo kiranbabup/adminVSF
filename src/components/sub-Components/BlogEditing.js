@@ -3,13 +3,7 @@ import React, { useEffect, useState } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
 import EditIcon from '@mui/icons-material/Edit';
 import Modal from '@mui/material/Modal';
-
-const loadingSpace = {
-    height: "30rem",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-}
+import { loadingSpaceA } from "../../assets/styles";
 
 const style = {
     position: 'absolute',
@@ -26,6 +20,7 @@ const style = {
 const BlogEditing = () => {
     const [resultData, setResultData] = useState([]);
     const [isLoadingBlogs, setIsLoadingBlogs] = useState(false);
+    const [isLoadingBlogUpdate, setIsLoadingBlogUpdate] = useState(false);
     const [open, setOpen] = React.useState(false);
     const [selectedBlog, setSelectedBlog] = useState(null);
     const [file, setFile] = useState(null);
@@ -96,6 +91,7 @@ const BlogEditing = () => {
         formData.append('content', content);
 
         console.log(formData);
+        setIsLoadingBlogUpdate(true);
         try {
             const response = await fetch(`https://heatmapapi.onrender.com/editBlog/${selectedBlog.slno}`, {
                 method: 'PUT',
@@ -111,13 +107,14 @@ const BlogEditing = () => {
             console.error('Error editing blog:', error.message);
             alert('something went wrong. please try again later');
             window.location.reload();
+            setIsLoadingBlogUpdate(false);
         }
     };
     return (
         <Box>
             <Box sx={{ backgroundColor: "aliceblue" }}>
                 {
-                    isLoadingBlogs ? <Box style={loadingSpace}><CircularProgress /> </Box> :
+                    isLoadingBlogs ? <Box style={loadingSpaceA}><CircularProgress /> </Box> :
                         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2, py: 2 }}>
                             {resultData.slice().reverse().map((item, index) => (
                                 <Card
@@ -208,8 +205,11 @@ const BlogEditing = () => {
                                 style={{ width: '100%' }}
                             />
                             <Box sx={{display:"flex", justifyContent:"center"}}>
+                                { isLoadingBlogUpdate ? <CircularProgress sx={{marginTop: 2}} size={24} />:
+                                <>
                             <Button variant="contained" type='submit' sx={{ marginLeft: 1, marginTop: 2 }}>Update</Button>
-                            <Button variant="contained" onClick={()=>handleClose()} sx={{ marginLeft: 1, marginTop: 2 }}>Cancel</Button>
+
+                            <Button variant="contained" onClick={()=>handleClose()} sx={{ marginLeft: 1, marginTop: 2 }}>Cancel</Button></>}
                         </Box>
                         </Box>
                     </Box>

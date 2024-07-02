@@ -1,25 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { Button, LinearProgress, Card, CardActionArea, CardContent, CardActions, MenuItem, InputLabel, FormControl } from '@mui/material';
+import { Button, LinearProgress, Box, Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import PropTypes from "prop-types";
 import img1 from '../assets/vstech1.png'
 import UploadedFilesTable from "../components/uploadedFilesTable";
 import SubScribersTable from "../components/subscribersTable"
 import AllUsers from "../components/allUsersTable";
-import Select from '@mui/material/Select';
 import { useNavigate } from "react-router-dom";
 import BroadUplod from "../components/BroadUplod";
 import SectorUplod from "../components/SectorUpload";
@@ -58,35 +45,8 @@ const PermanentDrawerLeft = () => {
   const [uploadStartTime, setUploadStartTime] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-  const [status, setStatus] = useState('');
-  const [activationStatus, setActivationStatus] = useState('');
-  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-
-  // const handleChange = (event) => {
-  //   const newStatus = event.target.value;
-  //   setActivationStatus(newStatus);
-  //   console.log(newStatus);
-  //   toggleCouponActivation(newStatus);
-  //   window.alert('updated sucessfully');
-  //   window.location.reload();
-  // };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const getStatusText = () => {
-    return status === 0 ? 'Deactivated' : 'Activated';
-  };
-
-  const getStatusColor = () => {
-    return status === 0 ? 'red' : 'green';
-  };
+  const [loadingUploadBtn, setLoadingUploadBtn] = useState(false);
 
   useEffect(() => {
     // fetchCouponCodeStatus();
@@ -127,7 +87,7 @@ const PermanentDrawerLeft = () => {
 
     const formData = new FormData();
     formData.append('file', file);
-
+    setLoadingUploadBtn(true);
     try {
       const response = await fetch('https://heatmapapi.onrender.com/upload-stock&heat-data', {
         method: 'POST',
@@ -143,6 +103,7 @@ const PermanentDrawerLeft = () => {
       console.error('Error uploading file:', e.message);
       alert('Something went wrong. Please try again later');
       window.location.reload();
+      setLoadingUploadBtn(false);
     }
   }
 
@@ -158,6 +119,7 @@ const PermanentDrawerLeft = () => {
     const formData = new FormData();
     formData.append('file', file);
 
+    setLoadingUploadBtn(true);
     try {
       const response = await fetch('https://heatmapapi.onrender.com/upload-broad', {
         method: 'POST',
@@ -174,7 +136,8 @@ const PermanentDrawerLeft = () => {
       console.error('Error uploading file:', e.message);
       alert('something went wrong. please try again later');
       window.location.reload();
-    }
+    setLoadingUploadBtn(false);
+  }
   }
 
   //strategy api handling
@@ -189,6 +152,7 @@ const PermanentDrawerLeft = () => {
     const formData = new FormData();
     formData.append('file', file);
 
+    setLoadingUploadBtn(true);
     try {
       const response = await fetch('https://heatmapapi.onrender.com/upload-strategy', {
         method: 'POST',
@@ -204,7 +168,8 @@ const PermanentDrawerLeft = () => {
       console.error('Error uploading file:', e.message);
       alert('something went wrong. please try again later');
       window.location.reload();
-    }
+    setLoadingUploadBtn(false);
+  }
   }
 
   //thematic api handling
@@ -219,6 +184,7 @@ const PermanentDrawerLeft = () => {
     const formData = new FormData();
     formData.append('file', file);
 
+    setLoadingUploadBtn(true);
     try {
       const response = await fetch('https://heatmapapi.onrender.com/upload-thematic', {
         method: 'POST',
@@ -234,7 +200,8 @@ const PermanentDrawerLeft = () => {
       console.error('Error uploading file:', e.message);
       alert('something went wrong. please try again later');
       window.location.reload();
-    }
+    setLoadingUploadBtn(false);
+  }
   }
 
   //sector api handling
@@ -249,6 +216,7 @@ const PermanentDrawerLeft = () => {
     const formData = new FormData();
     formData.append('file', file);
 
+    setLoadingUploadBtn(true);
     try {
       const response = await fetch('https://heatmapapi.onrender.com/upload-sector', {
         method: 'POST',
@@ -264,7 +232,8 @@ const PermanentDrawerLeft = () => {
       console.error('Error uploading file:', e.message);
       alert('something went wrong. please try again later');
       window.location.reload();
-    }
+    setLoadingUploadBtn(false);
+  }
   }
 
   //month and week data api handling
@@ -279,6 +248,7 @@ const PermanentDrawerLeft = () => {
     const formData = new FormData();
     formData.append('file', file);
 
+    setLoadingUploadBtn(true);
     try {
       const response = await fetch('https://heatmapapi.onrender.com/upload-month-week', {
         method: 'POST',
@@ -294,7 +264,8 @@ const PermanentDrawerLeft = () => {
       console.error('Error uploading file:', e.message);
       alert('Something went wrong. Please try again later');
       window.location.reload();
-    }
+    setLoadingUploadBtn(false);
+  }
   }
 
   //blog api handling
@@ -320,6 +291,7 @@ const PermanentDrawerLeft = () => {
       return;
     }
     console.log(formData);
+    setLoadingUploadBtn(true);
     try {
       const response = await fetch('https://heatmapapi.onrender.com/upload-blog', {
         method: 'POST',
@@ -335,51 +307,9 @@ const PermanentDrawerLeft = () => {
       console.error('Error uploading blog:', error.message);
       alert('something went wrong. please try again later');
       window.location.reload();
-    }
+    setLoadingUploadBtn(false);
+  }
   };
-
-  // coupon code api handling
-  // const toggleCouponActivation = (status) => {
-  //   const url = 'https://vsfintech-adminpanel-node.onrender.com/handle-couponcode';
-  //   const data = { status: status };
-
-  //   fetch(url, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(data),
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       console.log('Success:', data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error:', error);
-  //     });
-  // };
-
-  // // get coupon code status
-  // const fetchCouponCodeStatus = () => {
-  //   fetch('https://vsfintech-adminpanel-node.onrender.com/couponCode-status')
-  //     .then(response => {
-  //       if (!response.ok) {
-  //         throw new Error('Failed to fetch status data');
-  //       }
-  //       return response.json();
-  //     })
-  //     .then(data => {
-  //       // Assuming data is an array with a single status object
-  //       if (Array.isArray(data.results) && data.results.length > 0) {
-  //         setStatus(data.results[0].status);
-  //       } else {
-  //         throw new Error('Invalid data format');
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching status data:', error);
-  //     });
-  // };
 
   const logout = () => {
     navigate("/login");
@@ -445,22 +375,22 @@ const PermanentDrawerLeft = () => {
             </Box> :
 
             selectedItem === 0 ?
-              <AllIndicesDataUpload setFile={setFile} handleAllDataFileUpload={handleAllDataFileUpload} /> :
+              <AllIndicesDataUpload setFile={setFile} handleAllDataFileUpload={handleAllDataFileUpload} loadingUploadBtn={loadingUploadBtn} /> :
 
               selectedItem === 1 ?
-                <BroadUplod setFile={setFile} handleBroadFileUpload={handleBroadFileUpload} /> :
+                <BroadUplod setFile={setFile} handleBroadFileUpload={handleBroadFileUpload} loadingUploadBtn={loadingUploadBtn} /> :
 
                 selectedItem === 2 ?
-                  <StrategyUplod setFile={setFile} handleStrategyFileUpload={handleStrategyFileUpload} /> :
+                  <StrategyUplod setFile={setFile} handleStrategyFileUpload={handleStrategyFileUpload} loadingUploadBtn={loadingUploadBtn} /> :
 
                   selectedItem === 3 ?
-                    <ThematicUplod setFile={setFile} handleThematicFileUpload={handleThematicFileUpload} /> :
+                    <ThematicUplod setFile={setFile} handleThematicFileUpload={handleThematicFileUpload} loadingUploadBtn={loadingUploadBtn} /> :
 
                     selectedItem === 4 ?
-                      <SectorUplod setFile={setFile} handleSectorFileUpload={handleSectorFileUpload} /> :
+                      <SectorUplod setFile={setFile} handleSectorFileUpload={handleSectorFileUpload} loadingUploadBtn={loadingUploadBtn} /> :
 
                       selectedItem === 5 ?
-                        <MonthWeekUpload setFile={setFile} handleMonthAndWeekFileUpload={handleMonthAndWeekFileUpload} /> :
+                        <MonthWeekUpload setFile={setFile} handleMonthAndWeekFileUpload={handleMonthAndWeekFileUpload} loadingUploadBtn={loadingUploadBtn} /> :
 
                         selectedItem === 6 ?
                           <UploadedFilesTable /> :
@@ -472,55 +402,17 @@ const PermanentDrawerLeft = () => {
                               <SubScribersTable /> :
 
                               selectedItem === 9 ?
-                                <BlogComponent setFile={setFile} handleBlogUpload={handleBlogUpload} /> :
+                                <BlogComponent setFile={setFile} handleBlogUpload={handleBlogUpload} loadingUploadBtn={loadingUploadBtn}/> :
 
                                 selectedItem === 10 ?
                                 <PlansPage  /> :
 
                                 selectedItem === 11 ?
-                                  // <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
-                                  //   <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                  //     <Typography variant="h5">Coupon Code Status:</Typography>
-                                  //     <Typography variant="h5" style={{ color: getStatusColor() }}>{getStatusText()}</Typography>
-                                  //   </Box>
-
-                                  //   <Card sx={{ width: 400 }}>
-                                  //     <CardActionArea>
-                                  //       <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                  //         <Typography sx={{ padding: 2 }}>COUPON CODE:</Typography>
-                                  //         <Typography sx={{ color: 'green', fontWeight: 'bold' }}>KJADJ898</Typography>
-                                  //       </Box>
-
-                                  //       <CardContent>
-                                  //         <FormControl sx={{ m: 1, minWidth: 150, }}>
-                                  //           <InputLabel id="demo-controlled-open-select-label" >{getStatusText()}</InputLabel>
-                                  //           <Select
-                                  //             labelId="demo-controlled-open-select-label"
-                                  //             id="demo-controlled-open-select"
-                                  //             open={open}
-                                  //             onClose={handleClose}
-                                  //             onOpen={handleOpen}
-                                  //             value={activationStatus}
-                                  //             label="Status"
-                                  //             onChange={handleChange}
-                                  //           >
-                                  //             <MenuItem value={1}>Activate</MenuItem>
-                                  //             <MenuItem value={0}>Deactivate</MenuItem>
-                                  //           </Select>
-                                  //         </FormControl>
-                                  //       </CardContent>
-                                  //     </CardActionArea>
-                                  //     <CardActions>
-                                  //     </CardActions>
-                                  //   </Card>
-
-                                  
-                                  // </Box>
                                   <CouponsSetup />
                                   : ''
 
         }
-        <Box sx={{ width: '30%', marginLeft: 35, marginTop: 10 }}>
+        <Box sx={{ width: '45%', marginLeft: 45, marginTop: 10, }}>
           {isButtonClicked && file && <LinearProgressWithLabel value={progress} />}
         </Box>
 
