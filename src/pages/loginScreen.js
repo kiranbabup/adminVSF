@@ -34,12 +34,14 @@ const iconStyle = {
     color: '#00B9E0',
     fontSize: 60 
   };
+
 const LoginScreen = () => {
-    const [email,setEmail]= useState("");
+    const [email, setEmail]= useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    
     const handleLogin =()=>{
-        if(email === 'admin@gmail.com' && password === '123@Apple'){
+        if(email === 'vsfadmin@heatmap' && password === '123@Apple'){
             navigate("/home")
             // window.location.href='/home';
         }else{

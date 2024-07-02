@@ -9,13 +9,11 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
 const columns = [
-  { id: 'first_name', label: 'First Name'},
-  {
-    id: 'last_name',
-    label: 'Last Name',
-  },
+  { id: 'first_name', label: 'First Name' },
+  { id: 'last_name', label: 'Last Name' },
   { id: 'email', label: 'Email', minWidth: 100 },
-  { id: 'signup_on', label: 'Signup On', minWidth: 100 },
+  { id: 'subscribed_on', label: 'Subscribed On', minWidth: 100 },
+  { id: 'subscribe_expired_on', label: 'Expiry Date', minWidth: 100 },
 ];
 
 export default function StickyHeadTable() {
@@ -24,7 +22,7 @@ export default function StickyHeadTable() {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    fetch('https://vsfintech-adminpanel-node.onrender.com/users-data')
+    fetch('https://heatmapapi.onrender.com/subscribersdata')
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -32,9 +30,9 @@ export default function StickyHeadTable() {
         return response.json();
       })
       .then(data => {
-        if (Array.isArray(data.results)) {
-          setRows(data.results);
-          console.log(data.results);
+        if (Array.isArray(data.data)) {
+          setRows(data.data);
+          console.log(data.data);
         } else {
           throw new Error('Invalid data format');
         }
@@ -43,9 +41,6 @@ export default function StickyHeadTable() {
         console.error('Error fetching data:', error);
       });
   }, []);
-  
-
-
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -66,13 +61,14 @@ export default function StickyHeadTable() {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth,fontWeight:'bold'}}
+                  style={{ minWidth: column.minWidth, fontWeight: 'bold' }}
                 >
                   {column.label}
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
+          
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)

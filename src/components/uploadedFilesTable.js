@@ -9,14 +9,15 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
 const columns = [
-  { id: 'first_name', label: 'First Name'},
+  { id: 'category', label: 'Category', minWidth: 100 },
   {
-    id: 'last_name',
-    label: 'Last Name',
+    id: 'dates',
+    label: 'Uploaded Date',
+    minWidth: 100,
   },
-  { id: 'email', label: 'Email', minWidth: 100 },
-  { id: 'subscribed_on', label: 'Subscribed On', minWidth: 100 },
+  { id: 'file_name', label: 'File Name', minWidth: 100 },
 ];
+
 
 export default function StickyHeadTable() {
   const [page, setPage] = useState(0);
@@ -24,7 +25,7 @@ export default function StickyHeadTable() {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    fetch('https://vsfintech-adminpanel-node.onrender.com/subscribers-data')
+    fetch('https://heatmapapi.onrender.com/getuploadedfilesData')
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');

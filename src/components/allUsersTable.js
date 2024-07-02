@@ -1,23 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow} from '@mui/material';
 
 const columns = [
-  { id: 'category', label: 'Category', minWidth: 100 },
-  {
-    id: 'dates',
-    label: 'Uploaded Date',
-    minWidth: 100,
-  },
-  { id: 'file_name', label: 'File Name', minWidth: 100 },
+  { id: 'first_name', label: 'First Name'},
+  { id: 'last_name', label: 'Last Name'},
+  { id: 'email', label: 'Email', minWidth: 100 },
+  { id: 'signup_on', label: 'Signup On', minWidth: 100 },
+  { id: 'is_subscribed', label: 'Is Subscribed?', minWidth: 100 },
 ];
-
 
 export default function StickyHeadTable() {
   const [page, setPage] = useState(0);
@@ -25,7 +15,7 @@ export default function StickyHeadTable() {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    fetch('https://vsfintech-adminpanel-node.onrender.com/uploadedFiles-data')
+    fetch('https://heatmapapi.onrender.com/alluserdata')
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -33,9 +23,9 @@ export default function StickyHeadTable() {
         return response.json();
       })
       .then(data => {
-        if (Array.isArray(data.results)) {
-          setRows(data.results);
-          console.log(data.results);
+        if (Array.isArray(data.data)) {
+          setRows(data.data);
+          // console.log(data.data);
         } else {
           throw new Error('Invalid data format');
         }
@@ -45,7 +35,7 @@ export default function StickyHeadTable() {
       });
   }, []);
   
-
+// console.log(rows);
 
 
   const handleChangePage = (event, newPage) => {
@@ -81,7 +71,10 @@ export default function StickyHeadTable() {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     {columns.map((column) => {
-                      const value = row[column.id];
+                      let value = row[column.id];
+                      if (column.id === 'is_subscribed') {
+                        value = value === 1 ? 'Yes' : 'No';
+                      }
                       return (
                         <TableCell key={column.id} align={column.align}>
                           {column.format && typeof value === 'number'
