@@ -29,14 +29,14 @@ const CouponsSetup = () => {
             return;
         }
         setLoadingAddBtn(true);
-
+        const status = 1;
         try {
             const response = await fetch('https://heatmapapi.onrender.com/uploadcouponcode', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ coupon_code: code, discount: discountValue }),
+                body: JSON.stringify({ coupon_code: code, discount: discountValue, status: status }),
             });
             if (!response.ok) {
                 throw new Error('Coupon Code adding failed');

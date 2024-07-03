@@ -28,7 +28,7 @@ const PlansPage = () => {
                     throw new Error(`HTTP error status: ${response.status}`);
                 }
                 const result = await response.json();
-                console.log(result);
+                // console.log(result);
                 setPlans(result.data);
             } catch (error) {
                 console.error("Error fetching plans data:", error);

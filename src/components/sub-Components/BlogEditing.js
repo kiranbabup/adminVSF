@@ -45,7 +45,7 @@ const BlogEditing = () => {
                     throw new Error(`http error status: ${response.status}`);
                 }
                 const result = await response.json();
-                console.log(result);
+                // console.log(result);
                 setResultData(result.data);
             } catch (error) {
                 console.error("Error fetching blog data:", error);

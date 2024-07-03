@@ -25,4 +25,4 @@ Your app is ready to be deployed!
 ### `git push`
 
 ### `Live in` gh-pages
-https://kiranbabup.github.io/adminVSF/
+https://kiranbabup.github.io/adminVSF

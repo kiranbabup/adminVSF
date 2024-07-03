@@ -43,13 +43,13 @@ const CouponsEdit = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ status: code.status === 0 ? 1 : 0 })
             });
             if (!response.ok) {
                 throw new Error('Coupon code edit failed');
             } else {
-                alert('Coupon code status toggled successfully');
+                alert('Coupon code status Updated successfully');
                 setCodesData(codesData.map(item => item.id === code.id ? { ...item, status: code.status === 0 ? 1 : 0 } : item));
+                window.location.reload();
             }
         } catch (error) {
             console.error('Error editing Coupon code:', error.message);

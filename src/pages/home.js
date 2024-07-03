@@ -301,7 +301,7 @@ const PermanentDrawerLeft = () => {
         alert('All fields are mandatory');
         return;
       }
-      console.log(formData);
+      // console.log(formData);
       setLoadingUploadBtn(true);
       try {
         const response = await fetch('https://heatmapapi.onrender.com/upload-blog', {
