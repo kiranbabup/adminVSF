@@ -100,6 +100,14 @@ const CouponsEdit = () => {
                                                             </Button>
                                                         </TableCell>
                                                     );
+                                                } else if (column.id === 'status') {
+                                                    return (
+                                                        <TableCell key={column.id}>
+                                                            <Typography style={{ color: row.status === 1 ? 'green' : 'red' }}>
+                                                                {row.status === 1 ? 'Active' : 'Disabled'}
+                                                            </Typography>
+                                                        </TableCell>
+                                                    );
                                                 } else {
                                                     let value = row[column.id];
                                                     return (
