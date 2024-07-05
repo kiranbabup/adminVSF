@@ -1,7 +1,9 @@
 // AllIndicesDataUpload
-import { Box, Button, TextField } from "@mui/material";
-import { uploadLoadingSpace, uploadPageFormat } from "../assets/styles";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import { noteBox, noteStyle, uploadLoadingSpace, uploadPageFormat } from "../assets/styles";
 import CircularProgress from '@mui/material/CircularProgress';
+import ReadExcel from "./sub-Components/ReadExcel";
+import AllIndicesExample from "../assets/AllIndicesExample.xlsx";
 
 const AllIndicesDataUpload = ({ setFile, handleAllDataFileUpload, loadingUploadBtn }) => {
     return (
@@ -22,6 +24,12 @@ const AllIndicesDataUpload = ({ setFile, handleAllDataFileUpload, loadingUploadB
                             onClick={() => handleAllDataFileUpload()} >upload</Button>
                     </Box>
             }
+            <Box p={4}/>
+            <Box style={noteBox}>
+                <Typography style={noteStyle}>Note :</Typography>
+                <Typography >Data should be filled according to names-list, Naming format should not be replaced or shifted.</Typography>
+            </Box>
+            <ReadExcel file={AllIndicesExample} name={"AllIndicesExample"} />
         </Box>
     )
 }

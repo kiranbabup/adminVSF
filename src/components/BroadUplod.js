@@ -1,6 +1,8 @@
-import { Box, Button, TextField } from "@mui/material";
-import { uploadLoadingSpace, uploadPageFormat } from "../assets/styles";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import { noteBox, noteStyle, uploadLoadingSpace, uploadPageFormat } from "../assets/styles";
 import CircularProgress from '@mui/material/CircularProgress';
+import ReadExcel from "./sub-Components/ReadExcel";
+import BroadExample from "../assets/BroadExample.xlsx";
 
 const BroadUplod = ({ setFile, handleBroadFileUpload, loadingUploadBtn }) => {
     return (
@@ -21,6 +23,12 @@ const BroadUplod = ({ setFile, handleBroadFileUpload, loadingUploadBtn }) => {
                             onClick={() => handleBroadFileUpload()} >Upload</Button>
                     </Box>
             }
+            <Box p={4}/>
+            <Box style={noteBox}>
+                <Typography style={noteStyle}>Note :</Typography>
+                <Typography >LeftSide names-list are the unique in order so dont miss any or dont replace with one another.</Typography>
+            </Box>
+            <ReadExcel file={BroadExample} name={"BroadExample"} />
         </Box>
     )
 }

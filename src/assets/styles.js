@@ -26,3 +26,14 @@ export const uploadLoadingSpace = {
     justifyContent: "center",
     alignItems: "center"
 }
+
+export const noteBox ={
+    marginLeft: "5rem",
+    display: "flex",
+    alignItems: "center",
+    gap:"1rem"
+}
+export const noteStyle = {
+    fontWeight: "bold",
+    color: "red"
+}

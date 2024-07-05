@@ -1,7 +1,9 @@
 // MonthWeekUpload
-import { Box, Button, TextField } from "@mui/material";
-import { uploadLoadingSpace, uploadPageFormat } from "../assets/styles";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import { noteBox, noteStyle, uploadLoadingSpace, uploadPageFormat } from "../assets/styles";
 import CircularProgress from '@mui/material/CircularProgress';
+import ReadExcel from "./sub-Components/ReadExcel";
+import MonthAndWeekExample from "../assets/MonthAndWeekExample.xlsx";
 
 const MonthWeekUpload = ({ setFile, handleMonthAndWeekFileUpload, loadingUploadBtn }) => {
     return (
@@ -22,6 +24,12 @@ const MonthWeekUpload = ({ setFile, handleMonthAndWeekFileUpload, loadingUploadB
                             onClick={() => handleMonthAndWeekFileUpload()} >Upload</Button>
                     </Box>
             }
+            <Box p={4}/>
+            <Box style={noteBox}>
+                <Typography style={noteStyle}>Note :</Typography>
+                <Typography >LeftSide names-list are the unique in order so dont miss any or dont replace with one another.</Typography>
+            </Box>
+            <ReadExcel file={MonthAndWeekExample} name={"MonthAndWeekExample"} />
         </Box>
     )
 }
