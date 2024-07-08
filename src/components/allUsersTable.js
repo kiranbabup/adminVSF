@@ -31,7 +31,7 @@ export default function StickyHeadTable() {
           throw new Error(`http error status:${response.status}`);
         }
         const result = await response.json();
-        setRows(result.data);
+        setRows(result.data.reverse());
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -72,7 +72,7 @@ export default function StickyHeadTable() {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .reverse().map((row, index) => {
+              .map((row, index) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     {columns.map((column) => {

@@ -26,7 +26,7 @@ const CouponsEdit = () => {
                     throw new Error(`HTTP error status: ${response.status}`);
                 }
                 const result = await response.json();
-                setCodesData(result.data);
+                setCodesData(result.data.reverse());
             } catch (error) {
                 console.error("Error fetching plans data:", error);
             } finally {
@@ -88,7 +88,7 @@ const CouponsEdit = () => {
 
                                 <TableBody>
                                     {codesData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    .reverse().map((row, index) => {
+                                    .map((row, index) => {
                                         return (
                                         <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                                             {columns.map((column) => {
