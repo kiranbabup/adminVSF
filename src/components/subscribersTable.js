@@ -7,6 +7,7 @@ const columns = [
   { id: 'first_name', label: 'First Name' },
   { id: 'last_name', label: 'Last Name' },
   { id: 'email', label: 'Email', minWidth: 100 },
+  { id: 'phone_no', label: 'Phone', minWidth: 100 },
   { id: 'subscribed_on', label: 'Subscribed On', minWidth: 100 },
   { id: 'subscribe_expired_on', label: 'Expiry Date', minWidth: 100 },
 ];
