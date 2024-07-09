@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/adminVSF/static/css/main.f855e6bc.css",
-    "main.js": "/adminVSF/static/js/main.f10bd399.js",
+    "main.js": "/adminVSF/static/js/main.4f329919.js",
     "static/js/453.903d9734.chunk.js": "/adminVSF/static/js/453.903d9734.chunk.js",
     "static/media/vstech1.png": "/adminVSF/static/media/vstech1.7d64efe404e7e7197a26.png",
     "static/media/AllIndicesExample.xlsx": "/adminVSF/static/media/AllIndicesExample.ac72a28254ca363ea8f6.xlsx",
@@ -12,11 +12,11 @@
     "static/media/BroadExample.xlsx": "/adminVSF/static/media/BroadExample.12379fdcb967ab23f360.xlsx",
     "index.html": "/adminVSF/index.html",
     "main.f855e6bc.css.map": "/adminVSF/static/css/main.f855e6bc.css.map",
-    "main.f10bd399.js.map": "/adminVSF/static/js/main.f10bd399.js.map",
+    "main.4f329919.js.map": "/adminVSF/static/js/main.4f329919.js.map",
     "453.903d9734.chunk.js.map": "/adminVSF/static/js/453.903d9734.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.f10bd399.js"
+    "static/js/main.4f329919.js"
   ]
 }
