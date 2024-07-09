@@ -26,8 +26,8 @@ const MonthWeekUpload = ({ setFile, handleMonthAndWeekFileUpload, loadingUploadB
             }
             <Box p={4}/>
             <Box style={noteBox}>
-                <Typography style={noteStyle}>Note :</Typography>
-                <Typography >LeftSide names-list are the unique in order so dont miss any or dont replace with one another.</Typography>
+                <Typography style={noteStyle}>Note:</Typography>
+                <Typography >LeftSide names-list are the unique in order so dont miss any or dont replace with one another. File name should not have space.</Typography>
             </Box>
             <ReadExcel file={MonthAndWeekExample} name={"MonthAndWeekExample"} />
         </Box>

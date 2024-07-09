@@ -26,8 +26,8 @@ const AllIndicesDataUpload = ({ setFile, handleAllDataFileUpload, loadingUploadB
             }
             <Box p={4}/>
             <Box style={noteBox}>
-                <Typography style={noteStyle}>Note :</Typography>
-                <Typography >Data should be filled according to names-list, Naming format should not be replaced or shifted.</Typography>
+                <Typography style={noteStyle}>Note:</Typography>
+                <Typography >Data should be filled according to names-list, Naming format should not be replaced or shifted. File name should not have space.</Typography>
             </Box>
             <ReadExcel file={AllIndicesExample} name={"AllIndicesExample"} />
         </Box>
