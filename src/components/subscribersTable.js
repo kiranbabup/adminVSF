@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import { loadingSpace } from '../assets/styles';
+import { convertDateFormat } from '../assets/scripts';
 
 const columns = [
   { id: 'first_name', label: 'First Name' },
@@ -73,7 +74,12 @@ export default function StickyHeadTable() {
                     return (
                       <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                         {columns.map((column) => {
-                          const value = row[column.id];
+                          let value = row[column.id];
+                          if(column.id === 'subscribed_on') {
+                        value = convertDateFormat(value);
+                      } else if(column.id === 'subscribe_expired_on') {
+                        value = convertDateFormat(value);
+                      } 
                           return (
                             <TableCell key={column.id} align={column.align}>
                               {column.format && typeof value === 'number'

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import { loadingSpace } from '../assets/styles';
+import { formatDate } from '../assets/scripts';
 
 const columns = [
   { id: 'first_name', label: 'First Name' },
@@ -11,11 +12,6 @@ const columns = [
   { id: 'signup_on', label: 'Signup On', minWidth: 100 },
   { id: 'is_subscribed', label: 'Is Subscribed?', minWidth: 100 },
 ];
-
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  return date.toISOString().split('T')[0];
-};
 
 export default function StickyHeadTable() {
   const [page, setPage] = useState(0);

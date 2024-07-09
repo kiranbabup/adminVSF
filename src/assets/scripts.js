@@ -10,3 +10,14 @@ export function formatTimestamp(timestamp) {
 
     return formattedDate;
 }
+
+export const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const dateCame = date.toISOString().split('T')[0];
+    const [year, month, day] = dateCame.split('-');
+          return `${day}-${month}-${year}`;
+  };
+export const convertDateFormat = (dateString) => {
+    const [year, month, day] = dateString.split('-');
+    return `${day}-${month}-${year}`;
+};
