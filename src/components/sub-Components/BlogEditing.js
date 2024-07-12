@@ -90,7 +90,7 @@ const BlogEditing = () => {
         formData.append('title', title);
         formData.append('content', content);
 
-        console.log(formData);
+        // console.log(formData);
         setIsLoadingBlogUpdate(true);
         try {
             const response = await fetch(`https://heatmapapi.onrender.com/editBlog/${selectedBlog.slno}`, {
