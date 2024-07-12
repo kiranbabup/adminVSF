@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/adminVSF/static/css/main.f855e6bc.css",
-    "main.js": "/adminVSF/static/js/main.5cda4a53.js",
+    "main.js": "/adminVSF/static/js/main.6736634a.js",
     "static/js/453.903d9734.chunk.js": "/adminVSF/static/js/453.903d9734.chunk.js",
     "static/media/vstech1.png": "/adminVSF/static/media/vstech1.7d64efe404e7e7197a26.png",
-    "static/media/AllIndicesExample.xlsx": "/adminVSF/static/media/AllIndicesExample.ecfdd3301c01bd04cab0.xlsx",
-    "static/media/MonthAndWeekExample.xlsx": "/adminVSF/static/media/MonthAndWeekExample.98d819b50e9df4852a3a.xlsx",
+    "static/media/AllIndicesExample.xlsx": "/adminVSF/static/media/AllIndicesExample.52fc21f07fff84e4c2b0.xlsx",
+    "static/media/MonthAndWeekExample.xlsx": "/adminVSF/static/media/MonthAndWeekExample.04b2e43d62ab26e40c27.xlsx",
     "static/media/StrategyExample.xlsx": "/adminVSF/static/media/StrategyExample.c00cb5262e2a5920927f.xlsx",
-    "static/media/ThematicExample.xlsx": "/adminVSF/static/media/ThematicExample.40c0faf4f104d9680596.xlsx",
+    "static/media/ThematicExample.xlsx": "/adminVSF/static/media/ThematicExample.87bd0a7fbb843c7b76e8.xlsx",
     "static/media/SectorExample.xlsx": "/adminVSF/static/media/SectorExample.f0ec1aa72afbc2d53a6b.xlsx",
     "static/media/BroadExample.xlsx": "/adminVSF/static/media/BroadExample.12379fdcb967ab23f360.xlsx",
     "index.html": "/adminVSF/index.html",
     "main.f855e6bc.css.map": "/adminVSF/static/css/main.f855e6bc.css.map",
-    "main.5cda4a53.js.map": "/adminVSF/static/js/main.5cda4a53.js.map",
+    "main.6736634a.js.map": "/adminVSF/static/js/main.6736634a.js.map",
     "453.903d9734.chunk.js.map": "/adminVSF/static/js/453.903d9734.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.5cda4a53.js"
+    "static/js/main.6736634a.js"
   ]
 }
